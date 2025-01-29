@@ -2,7 +2,8 @@ name: push_three_tier_application_to_docker
 
 on:
   push:
-    branches: main
+    branches: 
+    - main
 
   pull_request:
     branches: 
