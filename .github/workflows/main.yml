@@ -24,19 +24,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Step 3: Build & Push Docker Image
-      - name: Build & Push backend-image
+      # Step 3: Build & Push Backend Image
+      - name: Build & Push Backend Image
         uses: docker/build-push-action@v6
         with:
           context: ./backend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/backend-app:latest
           
-      - name: build & push frontend-image
-      - uses: docker/build-push-action@v6
+      # Step 4: Build & Push Frontend Image
+      - name: Build & Push Frontend Image
+        uses: docker/build-push-action@v6
         with:
           context: ./frontend
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/frontend-app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/frontend-app:latest
+
 
         
