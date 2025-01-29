@@ -1,0 +1,32 @@
+name: push_three_tier_application_to_docker
+
+on:
+  push:
+    branches: main
+
+  pull_request:
+    branches: 
+    - main
+
+jobs: 
+  build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout repository
+    - uses: actions/checkout@v4
+
+    - name: log_in_to_dockerhub
+    - uses: docker/login-action@v3
+      with: 
+        username: ${{secret.DOCKER_USERNAME}}
+        password: ${{secret.DOCKER_PASSWORD}}
+
+    - name: build & push 
+    - uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tag: ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+
+        
